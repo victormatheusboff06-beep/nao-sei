@@ -1,31 +1,36 @@
-public class CreditoBancoFixo {
+public class Exercicio16 {
     public static void main(String[] args) {
-        // 1. Definição direta do saldo médio (Altere aqui para testar)
-        double saldoMedio = 450.00; 
-        
-        double percentual = 0;
-        boolean saldoValido = true;
+        // Altere os valores aqui para testar
+        int codigo = 6;
+        int quantidade = 3;
 
-        // 2. Verificação das faixas de saldo
-        if (saldoMedio >= 0 && saldoMedio <= 200) {
-            percentual = 0.0;
-        } else if (saldoMedio >= 201 && saldoMedio <= 400) {
-            percentual = 0.20; 
-        } else if (saldoMedio >= 401 && saldoMedio <= 600) {
-            percentual = 0.30; 
-        } else if (saldoMedio >= 601) {
-            percentual = 0.40; 
-        } else {
-            System.out.println("Saldo inválido (menor que zero)!");
-            saldoValido = false;
+        double precoUnitario = 0;
+
+        // Switch básico para descobrir o preço por unidade
+        switch (codigo) {
+            case 5:
+                precoUnitario = 32.00;
+                break;
+            case 6:
+                precoUnitario = 45.00;
+                break;
+            case 2:
+                precoUnitario = 37.00;
+                break;
+            case 12:
+                precoUnitario = 44.00;
+                break;
+            default:
+                System.out.println("Codigo de produto invalido!");
+                break;
         }
 
-        // 3. Cálculo e exibição (Só executa se o saldo for válido, sem usar return)
-        if (saldoValido) {
-            double valorCredito = saldoMedio * percentual;
-            
-            System.out.println("Saldo Médio do Cliente: R$ " + saldoMedio);
-            System.out.println("Valor do Crédito Concedido: R$ " + valorCredito);
+        // Só calcula se o código existir na tabela
+        if (precoUnitario > 0) {
+            double precoTotal = precoUnitario * quantidade;
+            System.out.println("Codigo do produto: " + codigo);
+            System.out.println("Quantidade: " + quantidade);
+            System.out.println("Preco Total: R$ " + precoTotal);
         }
     }
 }
