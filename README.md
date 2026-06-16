@@ -1,27 +1,17 @@
-public class Exercicio18 {
+public class Exercicio19 {
     public static void main(String[] args) {
         // Altere os valores aqui para testar
-        double salarioAntigo = 2000.00;
-        int codigoCargo = 102;
+        int a = 5;
+        int b = 4;
+        int c = 3;
 
-        double percentualAumento = 0;
-
-        // IFs básicos para checar o cargo
-        if (codigoCargo == 101) {
-            percentualAumento = 0.10; // 10%
-        } else if (codigoCargo == 102) {
-            percentualAumento = 0.20; // 20%
-        } else if (codigoCargo == 103) {
-            percentualAumento = 0.30; // 30%
+        // Regra: a soma de dois lados nao pode ser menor que o terceiro
+        if (a + b > c && a + c > b && b + c > a) {
+            System.out.println("Os valores formam um triangulo.");
+            System.out.println("Lados: a=" + a + ", b=" + b + ", c=" + c);
         } else {
-            percentualAumento = 0.40; // 40% para qualquer outro
+            System.out.println("Nao formam triangulo.");
+            System.out.println("Valores lidos: a=" + a + ", b=" + b + ", c=" + c);
         }
-
-        double valorAumento = salarioAntigo * percentualAumento;
-        double novoSalario = salarioAntigo + valorAumento;
-
-        System.out.println("Salario Antigo: R$ " + salarioAntigo);
-        System.out.println("Novo Salario: R$ " + novoSalario);
-        System.out.println("Diferenca: R$ " + valorAumento);
     }
 }
