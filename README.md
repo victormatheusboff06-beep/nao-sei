@@ -1,24 +1,40 @@
-public class Exercicio21 {
+public class Exercicio22 {
     public static void main(String[] args) {
-        // Altere as horas aqui para testar (Formato 24h)
-        int horaInicio = 22;
-        int horaFinal = 6;
+        // Altere os valores aqui para testar
+        int i = 1; // 1 = Crescente, 2 = Decrescente, 3 = Maior no meio
+        double a = 15.5;
+        double b = 5.2;
+        double c = 22.1;
 
-        int duracao;
+        // Variaveis auxiliares para organizar os valores do menor para o maior
+        double menor = 0, meio = 0, maior = 0;
 
-        if (horaFinal > horaInicio) {
-            // Jogo terminou no mesmo dia
-            duracao = horaFinal - horaInicio;
-        } else if (horaFinal < horaInicio) {
-            // Jogo terminou no dia seguinte
-            duracao = (24 - horaInicio) + horaFinal;
+        // Logica basica para descobrir quem é o menor, meio e maior
+        if (a <= b && a <= c) {
+            menor = a;
+            if (b <= c) { meio = b; maior = c; } 
+            else { meio = c; maior = b; }
+        } else if (b <= a && b <= c) {
+            menor = b;
+            if (a <= c) { meio = a; maior = c; } 
+            else { meio = c; maior = a; }
         } else {
-            // Se as horas forem iguais, durou o tempo maximo de 24 horas
-            duracao = 24;
+            menor = c;
+            if (a <= b) { meio = a; maior = b; } 
+            else { meio = b; maior = a; }
         }
 
-        System.out.println("Hora de inicio: " + horaInicio + "h");
-        System.out.println("Hora de termino: " + horaFinal + "h");
-        System.out.println("Duracao do jogo: " + duracao + " horas");
+        System.out.println("Valores originais: a=" + a + ", b=" + b + ", c=" + c);
+
+        // Executa a acao baseada no valor de i
+        if (i == 1) {
+            System.out.println("Ordem Crescente: " + menor + ", " + meio + ", " + maior);
+        } else if (i == 2) {
+            System.out.println("Ordem Decrescente: " + maior + ", " + meio + ", " + menor);
+        } else if (i == 3) {
+            System.out.println("Maior no meio: " + menor + ", " + maior + ", " + meio);
+        } else {
+            System.out.println("Codigo i invalido!");
+        }
     }
 }
