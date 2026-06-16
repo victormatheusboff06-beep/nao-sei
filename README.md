@@ -1,42 +1,42 @@
-public class Exercicio26 {
+public class Exercicio27 {
     public static void main(String[] args) {
-        // Altere os valores aqui para testar (Considere idades diferentes)
-        int homem1 = 25;
-        int homem2 = 35;
-        int mulher1 = 18;
-        int mulher2 = 30;
+        // Altere os valores aqui para testar
+        int numeroAluno = 12345;
+        double nota1 = 8.5;
+        double nota2 = 7.0;
+        double nota3 = 9.0;
+        double me = 8.0; // Média dos exercícios
 
-        // Identifica o homem mais velho e o mais novo
-        int homemVelho, homemNovo;
-        if (homem1 > homem2) {
-            homemVelho = homem1;
-            homemNovo = homem2;
+        // Fórmula: MA = (Nota1 + Nota2 * 2 + Nota3 * 3 + ME) / 7
+        double ma = (nota1 + (nota2 * 2) + (nota3 * 3) + me) / 7;
+
+        // Identificação do Conceito por faixas
+        char conceito;
+        String mensagem;
+
+        if (ma >= 9.0) {
+            conceito = 'A';
+            mensagem = "APROVADO";
+        } else if (ma >= 7.5 && ma < 9.0) {
+            conceito = 'B';
+            mensagem = "APROVADO";
+        } else if (ma >= 6.0 && ma < 7.5) {
+            conceito = 'C';
+            mensagem = "APROVADO";
+        } else if (ma >= 4.0 && ma < 6.0) {
+            conceito = 'D';
+            mensagem = "REPROVADO";
         } else {
-            homemVelho = homem2;
-            homemNovo = homem1;
+            conceito = 'E';
+            mensagem = "REPROVADO";
         }
 
-        // Identifica a mulher mais velha e a mais nova
-        int mulherVelha, mulherNova;
-        if (mulher1 > mulher2) {
-            mulherVelha = mulher1;
-            mulherNova = mulher2;
-        } else {
-            mulherVelha = mulher2;
-            mulherNova = mulher1;
-        }
-
-        // Cálculos solicitados
-        int soma = homemVelho + mulherNova;
-        int produto = homemNovo * mulherVelha;
-
-        // Exibição dos resultados
-        System.out.println("Idade do homem mais velho: " + homemVelho);
-        System.out.println("Idade da mulher mais nova: " + mulherNova);
-        System.out.println("Soma (Homem Velho + Mulher Nova): " + soma);
-        
-        System.out.println("Idade do homem mais novo: " + homemNovo);
-        System.out.println("Idade da mulher mais velha: " + mulherVelha);
-        System.out.println("Produto (Homem Novo * Mulher Velha): " + produto);
+        // Exibição de todos os dados exigidos pelo enunciado
+        System.out.println("Numero do aluno: " + numeroAluno);
+        System.out.println("Notas: " + nota1 + ", " + nota2 + ", " + nota3);
+        System.out.println("Media dos exercicios (ME): " + me);
+        System.out.println("Media de aproveitamento (MA): " + ma);
+        System.out.println("Conceito correspondente: " + conceito);
+        System.out.println("Status final: " + mensagem);
     }
 }
