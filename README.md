@@ -1,30 +1,24 @@
-public class Exercicio20 {
+public class Exercicio21 {
     public static void main(String[] args) {
-        // Altere o valor em Reais aqui para testar
-        int valorLido = 388; 
-        
-        int resto = valorLido;
+        // Altere as horas aqui para testar (Formato 24h)
+        int horaInicio = 22;
+        int horaFinal = 6;
 
-        // Descobre a quantidade de cada nota usando divisao inteira e resto
-        int notas100 = resto / 100;
-        resto = resto % 100;
+        int duracao;
 
-        int notas50 = resto / 50;
-        resto = resto % 50;
+        if (horaFinal > horaInicio) {
+            // Jogo terminou no mesmo dia
+            duracao = horaFinal - horaInicio;
+        } else if (horaFinal < horaInicio) {
+            // Jogo terminou no dia seguinte
+            duracao = (24 - horaInicio) + horaFinal;
+        } else {
+            // Se as horas forem iguais, durou o tempo maximo de 24 horas
+            duracao = 24;
+        }
 
-        int notas10 = resto / 10;
-        resto = resto % 10;
-
-        int notas5 = resto / 5;
-        resto = resto % 5;
-
-        int notas1 = resto; // O que sobrou sao notas de 1
-
-        System.out.println("Valor lido: R$ " + valorLido);
-        System.out.println("Notas de 100: " + notas100);
-        System.out.println("Notas de 50: " + notas50);
-        System.out.println("Notas de 10: " + notas10);
-        System.out.println("Notas de 5: " + notas5);
-        System.out.println("Notas de 1: " + notas1);
+        System.out.println("Hora de inicio: " + horaInicio + "h");
+        System.out.println("Hora de termino: " + horaFinal + "h");
+        System.out.println("Duracao do jogo: " + duracao + " horas");
     }
 }
