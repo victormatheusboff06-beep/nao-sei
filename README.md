@@ -1,35 +1,20 @@
-public class Exercicio23 {
+public class Exercicio24 {
     public static void main(String[] args) {
-        // Altere os horarios aqui para testar
-        int horaInicio = 22;
-        int minInicio = 30;
+        // Altere o valor aqui para testar
+        int quantidadeMacas = 15; 
         
-        int horaFinal = 1;
-        int minFinal = 15;
+        double precoPorMaca = 0;
 
-        // Transforma tudo para a menor unidade (minutos totais desde o inicio do dia)
-        int tempoInicioMinutos = (horaInicio * 60) + minInicio;
-        int tempoFinalMinutos = (horaFinal * 60) + minFinal;
-
-        int duracaoTotalMinutos;
-
-        if (tempoFinalMinutos >= tempoInicioMinutos) {
-            // Terminou no mesmo dia
-            duracaoTotalMinutos = tempoFinalMinutos - tempoInicioMinutos;
+        // Condição básica de quantidade
+        if (quantidadeMacas < 12) {
+            precoPorMaca = 1.30;
         } else {
-            // Terminou no dia seguinte (soma os minutos de um dia inteiro = 1440)
-            duracaoTotalMinutos = (1440 - tempoInicioMinutos) + tempoFinalMinutos;
+            precoPorMaca = 1.00;
         }
 
-        // Se deu exatamente 0 minutos de diferenca, significa que durou 24h inteiras
-        if (duracaoTotalMinutos == 0) {
-            duracaoTotalMinutos = 1440;
-        }
+        double custoTotal = quantidadeMacas * precoPorMaca;
 
-        // Converte de volta para horas e minutos usando divisao basica
-        int horasDuracao = duracaoTotalMinutos / 60;
-        int minutosDuracao = duracaoTotalMinutos % 60;
-
-        System.out.println("Duracao total: " + horasDuracao + " horas e " + minutosDuracao + " minutos.");
+        System.out.println("Quantidade de macas: " + quantidadeMacas);
+        System.out.println("Custo total da compra: R$ " + custoTotal);
     }
 }
