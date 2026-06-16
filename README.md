@@ -1,35 +1,31 @@
-public class CalculadoraMediasFixas {
+public class CreditoBancoFixo {
     public static void main(String[] args) {
-        // 1. Definição direta das notas (Altere os valores aqui para testar)
-        double nota1 = 7.5;
-        double nota2 = 8.0;
-        double nota3 = 6.0;
+        // 1. Definição direta do saldo médio (Altere aqui para testar)
+        double saldoMedio = 450.00; 
+        
+        double percentual = 0;
+        boolean saldoValido = true;
 
-        // Opção escolhida: 1 para Aritmética, 2 para Ponderada
-        int opcao = 2; 
-
-        double mediaFinal = 0;
-        boolean opcaoValida = true;
-
-        // 2. Processamento
-        switch (opcao) {
-            case 1:
-                mediaFinal = (nota1 + nota2 + nota3) / 3;
-                break;
-            case 2:
-                mediaFinal = ((nota1 * 3) + (nota2 * 3) + (nota3 * 4)) / 10;
-                break;
-            default:
-                System.out.println("Erro: Opção inválida!");
-                opcaoValida = false;
-                break;
+        // 2. Verificação das faixas de saldo
+        if (saldoMedio >= 0 && saldoMedio <= 200) {
+            percentual = 0.0;
+        } else if (saldoMedio >= 201 && saldoMedio <= 400) {
+            percentual = 0.20; 
+        } else if (saldoMedio >= 401 && saldoMedio <= 600) {
+            percentual = 0.30; 
+        } else if (saldoMedio >= 601) {
+            percentual = 0.40; 
+        } else {
+            System.out.println("Saldo inválido (menor que zero)!");
+            saldoValido = false;
         }
 
-        // 3. Exibição
-        if (opcaoValida) {
-            System.out.println("Notas: " + nota1 + ", " + nota2 + ", " + nota3);
-            System.out.println("Opção de média calculada: " + opcao);
-            System.out.printf("Resultado da Média: %.2f%n", mediaFinal);
+        // 3. Cálculo e exibição (Só executa se o saldo for válido, sem usar return)
+        if (saldoValido) {
+            double valorCredito = saldoMedio * percentual;
+            
+            System.out.println("Saldo Médio do Cliente: R$ " + saldoMedio);
+            System.out.println("Valor do Crédito Concedido: R$ " + valorCredito);
         }
     }
 }
