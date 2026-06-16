@@ -1,17 +1,30 @@
-public class Exercicio19 {
+public class Exercicio20 {
     public static void main(String[] args) {
-        // Altere os valores aqui para testar
-        int a = 5;
-        int b = 4;
-        int c = 3;
+        // Altere o valor em Reais aqui para testar
+        int valorLido = 388; 
+        
+        int resto = valorLido;
 
-        // Regra: a soma de dois lados nao pode ser menor que o terceiro
-        if (a + b > c && a + c > b && b + c > a) {
-            System.out.println("Os valores formam um triangulo.");
-            System.out.println("Lados: a=" + a + ", b=" + b + ", c=" + c);
-        } else {
-            System.out.println("Nao formam triangulo.");
-            System.out.println("Valores lidos: a=" + a + ", b=" + b + ", c=" + c);
-        }
+        // Descobre a quantidade de cada nota usando divisao inteira e resto
+        int notas100 = resto / 100;
+        resto = resto % 100;
+
+        int notas50 = resto / 50;
+        resto = resto % 50;
+
+        int notas10 = resto / 10;
+        resto = resto % 10;
+
+        int notas5 = resto / 5;
+        resto = resto % 5;
+
+        int notas1 = resto; // O que sobrou sao notas de 1
+
+        System.out.println("Valor lido: R$ " + valorLido);
+        System.out.println("Notas de 100: " + notas100);
+        System.out.println("Notas de 50: " + notas50);
+        System.out.println("Notas de 10: " + notas10);
+        System.out.println("Notas de 5: " + notas5);
+        System.out.println("Notas de 1: " + notas1);
     }
 }
