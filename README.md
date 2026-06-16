@@ -1,40 +1,35 @@
-public class Exercicio22 {
+public class Exercicio23 {
     public static void main(String[] args) {
-        // Altere os valores aqui para testar
-        int i = 1; // 1 = Crescente, 2 = Decrescente, 3 = Maior no meio
-        double a = 15.5;
-        double b = 5.2;
-        double c = 22.1;
+        // Altere os horarios aqui para testar
+        int horaInicio = 22;
+        int minInicio = 30;
+        
+        int horaFinal = 1;
+        int minFinal = 15;
 
-        // Variaveis auxiliares para organizar os valores do menor para o maior
-        double menor = 0, meio = 0, maior = 0;
+        // Transforma tudo para a menor unidade (minutos totais desde o inicio do dia)
+        int tempoInicioMinutos = (horaInicio * 60) + minInicio;
+        int tempoFinalMinutos = (horaFinal * 60) + minFinal;
 
-        // Logica basica para descobrir quem é o menor, meio e maior
-        if (a <= b && a <= c) {
-            menor = a;
-            if (b <= c) { meio = b; maior = c; } 
-            else { meio = c; maior = b; }
-        } else if (b <= a && b <= c) {
-            menor = b;
-            if (a <= c) { meio = a; maior = c; } 
-            else { meio = c; maior = a; }
+        int duracaoTotalMinutos;
+
+        if (tempoFinalMinutos >= tempoInicioMinutos) {
+            // Terminou no mesmo dia
+            duracaoTotalMinutos = tempoFinalMinutos - tempoInicioMinutos;
         } else {
-            menor = c;
-            if (a <= b) { meio = a; maior = b; } 
-            else { meio = b; maior = a; }
+            // Terminou no dia seguinte (soma os minutos de um dia inteiro = 1440)
+            duracaoTotalMinutos = (1440 - tempoInicioMinutos) + tempoFinalMinutos;
         }
 
-        System.out.println("Valores originais: a=" + a + ", b=" + b + ", c=" + c);
-
-        // Executa a acao baseada no valor de i
-        if (i == 1) {
-            System.out.println("Ordem Crescente: " + menor + ", " + meio + ", " + maior);
-        } else if (i == 2) {
-            System.out.println("Ordem Decrescente: " + maior + ", " + meio + ", " + menor);
-        } else if (i == 3) {
-            System.out.println("Maior no meio: " + menor + ", " + maior + ", " + meio);
-        } else {
-            System.out.println("Codigo i invalido!");
+        // Se deu exatamente 0 minutos de diferenca, significa que durou 24h inteiras
+        if (duracaoTotalMinutos == 0) {
+            duracaoTotalMinutos = 1440;
         }
+
+        // Converte de volta para horas e minutos usando divisao basica
+        int horasDuracao = duracaoTotalMinutos / 60;
+        int minutosDuracao = duracaoTotalMinutos % 60;
+
+        System.out.println("Duracao total: " + horasDuracao + " horas e " + minutosDuracao + " minutos.");
     }
 }
