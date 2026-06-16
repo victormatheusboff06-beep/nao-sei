@@ -1,20 +1,19 @@
-public class Exercicio24 {
+public class Exercicio25 {
     public static void main(String[] args) {
-        // Altere o valor aqui para testar
-        int quantidadeMacas = 15; 
-        
-        double precoPorMaca = 0;
+        // Altere os nomes e gols aqui para testar
+        String time1 = "Time A";
+        int golsTime1 = 3;
 
-        // Condição básica de quantidade
-        if (quantidadeMacas < 12) {
-            precoPorMaca = 1.30;
+        String time2 = "Time B";
+        int golsTime2 = 1;
+
+        // Comparações simples de maior/menor
+        if (golsTime1 > golsTime2) {
+            System.out.println("Vencedor: " + time1);
+        } else if (golsTime2 > golsTime1) {
+            System.out.println("Vencedor: " + time2);
         } else {
-            precoPorMaca = 1.00;
+            System.out.println("EMPATE");
         }
-
-        double custoTotal = quantidadeMacas * precoPorMaca;
-
-        System.out.println("Quantidade de macas: " + quantidadeMacas);
-        System.out.println("Custo total da compra: R$ " + custoTotal);
     }
 }
