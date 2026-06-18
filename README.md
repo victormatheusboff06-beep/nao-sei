@@ -71,3 +71,15 @@ if (place_meeting(x, y + 1, obj_inimigo) && vspd > 0)
         vspd = -8;
     }
 }
+
+draw_set_color(c_red);
+draw_rectangle(100, 30, 700, 50, false);
+
+draw_set_color(c_green);
+draw_rectangle(
+    100,
+    30,
+    100 + (600 * vida / vida_max),
+    50,
+    false
+);
