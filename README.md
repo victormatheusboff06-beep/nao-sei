@@ -10,7 +10,7 @@ hspd = _move * spd;
 if (!place_meeting(x, y + 1, obj_parede)) {
     vspd += grav;
 } else {
-    vspd = 0; // Zera a velocidade vertical se estiver pisando no chão
+    vspd = 0; 
     
      
     if (_key_jump) {
@@ -42,3 +42,32 @@ jump_force = -10;
 
 hspd = 0;
 vspd = 0;
+
+inimigo codigo
+
+spd = 2;
+direcao = 1;
+
+x += spd * direcao;
+
+if (place_meeting(x + direcao, y, obj_parede))
+{
+    direcao *= -1;
+}
+
+if (place_meeting(x, y, obj_inimigo))
+{
+    show_message("Você morreu!");
+    room_restart();
+}
+
+if (place_meeting(x, y + 1, obj_inimigo) && vspd > 0)
+{
+    var inimigo = instance_place(x, y + 1, obj_inimigo);
+
+    if (inimigo != noone)
+    {
+        instance_destroy(inimigo);
+        vspd = -8;
+    }
+}
