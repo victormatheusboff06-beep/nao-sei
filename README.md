@@ -35,3 +35,10 @@ if (place_meeting(x, y + vspd, obj_parede)) {
     vspd = 0;
 }
 y += vspd;
+
+spd = 4;
+grav = 0.5;
+jump_force = -10;
+
+hspd = 0;
+vspd = 0;
