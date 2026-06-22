@@ -1,3 +1,5 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js";
+
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
@@ -21,10 +23,8 @@ camera.position.z = 3;
 
 function animate() {
   requestAnimationFrame(animate);
-
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
-
   renderer.render(scene, camera);
 }
 
