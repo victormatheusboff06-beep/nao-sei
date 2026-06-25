@@ -6,15 +6,19 @@ import java.awt.event.*;
 
 public class JogoControle extends JPanel implements KeyListener, ActionListener {
     // Posição e velocidade do JOGADOR (Verde)
-    private int x = 150, y = 150;
+    private int x = 200, y = 200;
     private int velX = 0, velY = 0;
     
     // Posição e velocidade do INIMIGO (Vermelho)
-    private int inimigoX = 50, inimigoY = 50;
-    private int inimigoVel = 2; // Velocidade da perseguição
+    private int inimigoX = 30, inimigoY = 30;
+    private int inimigoVel = 2;
+
+    // Tempo de espera aumentado para 5 segundos (60 frames * 5 = 300)
+    private int framesIniciais = 0;
+    private final int ESPERA_TOTAL = 300;
 
     public JogoControle() {
-        JFrame frame = new JFrame("Jogo com Inimigo");
+        JFrame frame = new JFrame("Jogo com Atraso de 5 Segundos");
         frame.add(this);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,30 +45,49 @@ public class JogoControle extends JPanel implements KeyListener, ActionListener 
         // Desenha o Inimigo (Vermelho)
         g.setColor(Color.RED);
         g.fillRect(inimigoX, inimigoY, 40, 40);
+        
+        // Desenha a contagem regressiva na tela se ainda estiver no atraso inicial
+        if (framesIniciais < ESPERA_TOTAL) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            int segundosRestantes = 5 - (framesIniciais / 60);
+            g.drawString("Prepare-se! O inimigo move em: " + segundosRestantes, 30, 340);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Move o jogador
+        // O jogador já pode se mover livremente durante os 5 segundos para se posicionar
         x += velX;
         y += velY;
         
-        // Lógica de Perseguição: O inimigo olha onde o jogador está e vai atrás
+        // Controla o atraso de 5 segundos
+        if (framesIniciais < ESPERA_TOTAL) {
+            framesIniciais++;
+            repaint();
+            return; // Bloqueia o movimento do inimigo e a checagem de colisão por enquanto
+        }
+        
+        // Lógica de Perseguição (Só roda após os 5 segundos)
         if (inimigoX < x) inimigoX += inimigoVel;
         if (inimigoX > x) inimigoX -= inimigoVel;
         if (inimigoY < y) inimigoY += inimigoVel;
         if (inimigoY > y) inimigoY -= inimigoVel;
         
-        // Lógica de Colisão (Se o inimigo encostar no jogador)
+        // Lógica de Colisão (Só roda após os 5 segundos)
         Rectangle jogadorBox = new Rectangle(x, y, 40, 40);
         Rectangle inimigoBox = new Rectangle(inimigoX, inimigoY, 40, 40);
         
         if (jogadorBox.intersects(inimigoBox)) {
-            // Reinicia as posições se houver colisão (Game Over simples)
-            x = 150;
-            y = 150;
-            inimigoX = 50;
-            inimigoY = 50;
+            // Reseta tudo para a próxima partida
+            x = 200;
+            y = 200;
+            inimigoX = 30;
+            inimigoY = 30;
+            velX = 0;
+            velY = 0;
+            framesIniciais = 0; 
+            
             JOptionPane.showMessageDialog(this, "O inimigo te pegou! Tente novamente.");
         }
         
