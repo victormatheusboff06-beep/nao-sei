@@ -1,37 +1,42 @@
-var _key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
-var _key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var _key_jump = keyboard_check_pressed(vk_space);
+extends CharacterBody3D
 
+@export var speed := 5.0
+@export var jump_velocity := 5.0
+@export var mouse_sensitivity := 0.003
 
-var _move = _key_right - _key_left;
-hspd = _move * spd;
+@onready var camera = $Camera3D
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-if (!place_meeting(x, y + 1, obj_parede)) {
-    vspd += grav;
-} else {
-    vspd = 0; // Zera a velocidade vertical se estiver pisando no chão
-    
-     
-    if (_key_jump) {
-        vspd = jump_force;
-    }
-}
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		camera.rotate_x(-event.relative.y * mouse_sensitivity)
+		camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
 
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-if (place_meeting(x + hspd, y, obj_parede)) {
-    while (!place_meeting(x + sign(hspd), y, obj_parede)) {
-        x += sign(hspd);
-    }
-    hspd = 0;
-}
-x += hspd;
+func _physics_process(delta):
+	# Gravidade
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
+	# Pulo
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
 
-if (place_meeting(x, y + vspd, obj_parede)) {
-    while (!place_meeting(x, y + sign(vspd), obj_parede)) {
-        y += sign(vspd);
-    }
-    vspd = 0;
-}
-y += vspd;
+	# Movimento
+	var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	if direction:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+
+	move_and_slide()
