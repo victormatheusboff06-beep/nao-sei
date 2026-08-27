@@ -1,28 +1,65 @@
-extends AnimatableBody3D
+import java.util.Scanner;
 
-@export var player: CharacterBody3D
-@export var interaction_distance := 2.5
-@export var close_time := 3.0
+public class Main {
+    public static void main(String[] args) {
 
-var is_open := false
+        Scanner entrada = new Scanner(System.in);
 
-@onready var animation_player = $AnimationPlayer
+        String[] nomes = new String[5];
+        double[] salarios = new double[5];
+        int[] tempo = new int[5];
 
-func _process(_delta):
-	if player == null:
-		return
+        // Preenchendo os vetores
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Digite o nome do funcionário: ");
+            nomes[i] = entrada.nextLine();
 
-	var distance = global_position.distance_to(player.global_position)
+            System.out.print("Digite o salário: R$ ");
+            salarios[i] = entrada.nextDouble();
 
-	if distance <= interaction_distance:
-		if Input.is_action_just_pressed("interact") and not is_open:
-			abrir_porta()
+            System.out.print("Digite o tempo de serviço: ");
+            tempo[i] = entrada.nextInt();
 
-func abrir_porta():
-	is_open = true
-	animation_player.play("open")
+            entrada.nextLine(); // Limpa o ENTER
+        }
 
-	await get_tree().create_timer(close_time).timeout
+        // Primeiro relatório
+        System.out.println("\n=== FUNCIONÁRIOS SEM AUMENTO ===");
 
-	animation_player.play("close")
-	is_open = false
+        for (int i = 0; i < 5; i++) {
+            if (tempo[i] <= 5 && salarios[i] >= 1940) {
+                System.out.println(nomes[i]);
+            }
+        }
+
+        // Segundo relatório
+        System.out.println("\n=== FUNCIONÁRIOS COM AUMENTO ===");
+
+        for (int i = 0; i < 5; i++) {
+
+            if (tempo[i] > 5 && salarios[i] < 1940) {
+                // As duas condições: 35%
+                salarios[i] = salarios[i] * 1.35;
+
+                System.out.printf("%s - Novo salário: R$ %.2f%n",
+                        nomes[i], salarios[i]);
+
+            } else if (tempo[i] > 5) {
+                // Apenas tempo de serviço: 25%
+                salarios[i] = salarios[i] * 1.25;
+
+                System.out.printf("%s - Novo salário: R$ %.2f%n",
+                        nomes[i], salarios[i]);
+
+            } else if (salarios[i] < 1940) {
+                // Apenas salário: 15%
+                salarios[i] = salarios[i] * 1.15;
+
+                System.out.printf("%s - Novo salário: R$ %.2f%n",
+                        nomes[i], salarios[i]);
+            }
+        }
+
+        entrada.close();
+    }
+}
