@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://b7jn8jglh5jxt"]
+
+[ext_resource type="Script" uid="uid://cm572ugf7ptjj" path="res://player.gd" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://ux4a50cgo38a" path="res://360_F_179710260_yGn8CQ8VJ0DLGK6nWJ7b1CF6jvwAuesj.jpg" id="1_i5arm"]
+[ext_resource type="Texture2D" uid="uid://dhnpxutmcub02" path="res://1955075-grama-verde-para-textura-ou-fundo-gratis-foto.jpg" id="2_noarx"]
+[ext_resource type="Script" uid="uid://w67gll2c5lji" path="res://door.gd" id="4_r3fl7"]
+[ext_resource type="Texture2D" uid="uid://beeaq2a3jgt77" path="res://textura-porta-de-madeira-do-fundo-70480174.webp" id="5_jka67"]
+[ext_resource type="Texture2D" uid="uid://bsjxpeeessuhc" path="res://images.jpg" id="7_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://d3kv0jc7cx7ev" path="res://018-Door.glb" id="8_jsk3o"]
+[ext_resource type="PackedScene" uid="uid://bachjm5uhj7no" path="res://Male.glb" id="9_4arys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.25739855, 0.35796806, 0.33893436, 1)
+albedo_texture = ExtResource("1_i5arm")
+detail_albedo = ExtResource("2_noarx")
+uv1_scale = Vector3(1, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dputa"]
+size = Vector3(1.9490504, 1, 3.9103699)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p6ubn"]
+size = Vector3(113.45215, 1.3124695, 114.9202)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p6ubn"]
+radius = 0.59716797
+height = 10.7957535
+
+[sub_resource type="BoxMesh" id="BoxMesh_p6ubn"]
+size = Vector3(113.89429, 0.97229004, 107.343)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1r7e"]
+albedo_texture = ExtResource("2_noarx")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_786tl"]
+size = Vector3(6.086914, 3.996582, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_irs17"]
+
+[sub_resource type="Animation" id="Animation_i5arm"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_wc5p8"]
+resource_name = "open"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsk3o"]
+_data = {
+&"RESET": SubResource("Animation_i5arm"),
+&"open": SubResource("Animation_wc5p8")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4arys"]
+albedo_texture = ExtResource("5_jka67")
+uv1_scale = Vector3(-3, 2, 1)
+uv1_offset = Vector3(0, -0.01, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_786tl"]
+material = SubResource("StandardMaterial3D_4arys")
+size = Vector3(6.0275574, 3.9516754, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6ubn"]
+albedo_texture = ExtResource("7_wc5p8")
+uv1_scale = Vector3(3, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxofg"]
+size = Vector3(1.173706, 1.5134583, 0.8110962)
+
+[node name="Node3D" type="Node3D" unique_id=867960953]
+
+[node name="parede" type="StaticBody3D" parent="." unique_id=1294559742]
+transform = Transform3D(1, 0, 0, 0, 16.459923, 0, 0, 0, 0.12070589, 0, 2.849536, 86.840965)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="parede" unique_id=957209154]
+transform = Transform3D(60.08294, 0, 0, 0, 1.3589469, 0, 0, 0, 31.112062, 16.780378, 0.4995563, -282.26837)
+material_override = SubResource("StandardMaterial3D_a0tk4")
+mesh = SubResource("BoxMesh_dputa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="parede" unique_id=720136255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.656494, 0.50971985, -286.8255)
+shape = SubResource("BoxShape3D_p6ubn")
+
+[node name="player" type="CharacterBody3D" parent="." unique_id=896193189]
+script = ExtResource("1_a202f")
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=59755359]
+transform = Transform3D(0.99612606, 0, -0.08793685, 0, 1, 0, 0.08793685, 0, 0.99612606, 0.073599204, 10.150872, -0.6097998)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=1519300999]
+transform = Transform3D(2.0881495, 0, -0.07960445, 0, 1, 0, 0.16675518, 0, 0.9968265, 0.024063796, 6.0537853, 0)
+shape = SubResource("CapsuleShape3D_p6ubn")
+
+[node name="Male2" parent="player" unique_id=251989883 instance=ExtResource("9_4arys")]
+transform = Transform3D(0.3081706, 0, 3.2311723, 0, 4.196279, 0, -4.6291075, 0, 0.21510679, 0.03278303, 0.68337274, 0.033136606)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2069777805]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=766545419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736938, 0, -0.2610321)
+shape = SubResource("BoxShape3D_p6ubn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=130706033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.629272, -0.0138549805, -4.060768)
+mesh = SubResource("BoxMesh_p6ubn")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1r7e")
+
+[node name="Door" type="AnimatableBody3D" parent="." unique_id=902443588]
+transform = Transform3D(1, 0, 0, 0, 2.7528963, 0, 0, 0, 1, 0, 0, 25.700598)
+script = ExtResource("4_r3fl7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=1108881789]
+transform = Transform3D(0.99999166, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999166, 1.3061485, 2.1771708, 0)
+shape = SubResource("BoxShape3D_786tl")
+
+[node name="InteractionManager" type="CanvasLayer" parent="Door" unique_id=1702428156]
+
+[node name="Label" type="Label" parent="Door/InteractionManager" unique_id=1137835689]
+visible = false
+offset_left = 397.0
+offset_top = 168.0
+offset_right = 573.0
+offset_bottom = 191.0
+text = "Aperte E para interagir"
+label_settings = SubResource("LabelSettings_irs17")
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door" unique_id=108589799]
+libraries/ = SubResource("AnimationLibrary_jsk3o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" unique_id=2106413607]
+transform = Transform3D(0.9999805, 0, 0, 0, 0.9999999, 0, 0, 0, 0.315952, 1.281474, 2.2033424, 0)
+mesh = SubResource("BoxMesh_786tl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=273859247]
+transform = Transform3D(3.3281846, 0, 2.66478, 0, 3.0823221, 0, -1.8324139, 0, 4.8399973, 12.278253, 2.8076508, 22.618103)
+material_override = SubResource("StandardMaterial3D_p6ubn")
+mesh = SubResource("BoxMesh_sxofg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=179923968]
+transform = Transform3D(3.5703669, 0, -1.8888584, 0, 3.0823221, 0, 1.2988588, 0, 5.19219, 18.320663, 2.8076508, 22.618103)
+material_override = SubResource("StandardMaterial3D_p6ubn")
+mesh = SubResource("BoxMesh_sxofg")
+
+[node name="018-Door" parent="." unique_id=1468781068 instance=ExtResource("8_jsk3o")]
+transform = Transform3D(4.229534, 0, 0, 0, 6.5767927, 0, 0, 0, 6.91396, 23.016163, 0.71884227, -37.388695)
