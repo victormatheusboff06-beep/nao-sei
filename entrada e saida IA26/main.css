@@ -1,0 +1,59 @@
+body {
+    display: grid;
+    justify-content: center;
+    width: 1800px;
+    height: 800px;
+    border-block: auto;
+    border-radius: 300px;
+}
+
+.janela {
+    border-block: auto;
+    justify-content: center;
+    width: 600px;
+    height: 850px;
+    display: grid;
+    border-radius: 20px;
+    border-color: red;
+    border-style: solid;
+    border: 3px solid slategrey;
+    padding: 20px;
+}
+
+h2 {
+    justify-content: center;
+    font-family: sans-serif;
+
+}
+
+form, ul {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+
+form {
+    margin-bottom: .5rem;
+    display: flex;
+}
+
+input {
+    flex-grow: 1;
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+button {
+    background-color: slategrey
+}
+
+.Saldo {
+    justify-content: center;
+}
